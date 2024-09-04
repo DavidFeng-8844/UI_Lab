@@ -11,11 +11,11 @@ int main() {
     double volume = x*y*z;
     cout << "The volume of the cubid is " << volume << "!" <<endl;
     // cout << "Coordinates are (" << x << "," << y <<")" << endl;
- //    if (x >= 0 && x <= 3 && y >= 0  && y <= 3) {
- //        cout << "inside" << endl;
- //    }else {
- //        cout << "outside" <<endl;
- //    }
+    //    if (x >= 0 && x <= 3 && y >= 0  && y <= 3) {
+    //        cout << "inside" << endl;
+    //    }else {
+    //        cout << "outside" <<endl;
+    //    }
 }
 
 
