@@ -39,5 +39,4 @@ int main()
         // cout << MyVec[i];
     }
     cout << "The mean is: " << mean_vect(MyVec) << endl;
-
 }
