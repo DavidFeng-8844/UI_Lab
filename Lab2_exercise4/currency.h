@@ -10,6 +10,7 @@ public:
     int super, sub;
     Currency(int, int);
     virtual string toString() = 0;
+    void zero();
 };
 
 class Euro : public Currency {
