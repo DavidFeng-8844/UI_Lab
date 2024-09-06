@@ -3,7 +3,14 @@
 
 using namespace std;
 
-Money::Money(int e, int c) {
+Money::Money(int e, int c)
+{
+    if (e < 0) {
+        throw invalid_argument("invalid euros"); // returns from the method instantly
+    }
+    if (c < 0 || c > 99) {
+        throw invalid_argument("invalid cents");
+    }
     euros = e; cents = c;
 }
 
@@ -30,17 +37,41 @@ Money operator+ (const Money& m1, const Money& m2) {
     int e = m1.getEuros() + m2.getEuros(); int c = m1.getCents() + m2.getCents(); return Money(e + c/100, c % 100);
 }
 
-Money operator+ (const Money& m1, int value)
-{
-    int e = value - (value % 1) + m1.getEuros(); int c = value % 1 + m1.getCents(); return Money(e, c);
+// Money operator+ (const Money& m1, int value)
+// {
+//     int e = value - (value % 1) + m1.getEuros(); int c = value % 1 + m1.getCents(); return Money(e, c);
+// }
+
+// Money operator+ (const Money& m1, double value)
+// {
+//     double e = value - (value % 1) + m1.getEuros(); double c = value % 1 + m1.getCents(); return Money(e, c);
+// }
+
+template <typename T>
+
+Money operator+ (const Money& m1, T value) {
+    T e = static_cast<int>(value) + m1.getEuros();
+    T newCents = value - static_cast<int>(value);
+    // cout << newCents;
+    // T c = newCents * 100 + m1.getCents();
+    cout << m1.getCents() << endl;
+    double m1Cents =  m1.getCents();  // Convert cents from int to double
+    T c = (newCents + m1Cents / 100) * 100;
+    return Money(e, c);
 }
+
 int main()
 {
+    try {
+        Money m3 (23, 101);
+    } catch (invalid_argument const& e ) {
+        cout << "invalid argument " << e.what() << endl;
+    }
     Money m1(2, 50);
     Money m2(0, 52);
     // Money sum = m1.plus(m2);
     Money sum = m1 + m2;
     cout << "Sum = " << sum.toString() << endl;
-    cout << ( m1 + 1 ).toString() << endl;
+    cout << ( m1 + 45.32 ).toString() << endl;
     return 0; // everything went as planned
 }
