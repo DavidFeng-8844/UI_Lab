@@ -47,32 +47,32 @@ CurrencyArray& CurrencyArray::operator=(const CurrencyArray& other) {
 // }
 
 ///// Use referecne /////
-// CurrencyArray& baz(CurrencyArray& m4)
-// {
-//     cout << "method&" << endl;
-//     return m4;
-// }
-// int main()
-// {
-//     cout << "start of main " << endl;
-//     {
-//         CurrencyArray m3(2, 4);
-//         cout << "middle of main " << endl;
-//         baz(m3);
-//     }
-//     cout << "end of main " << endl;
-// }
-
-CurrencyArray& create()
+CurrencyArray& baz(CurrencyArray& m4)
 {
-    CurrencyArray m3(2, 4);
-    return m3;
+    cout << "method&" << endl;
+    return m4;
 }
 int main()
 {
-    CurrencyArray& ma = create();
-    cout << "cents " << ma.getCents() << endl;
+    cout << "start of main " << endl;
+    {
+        CurrencyArray m3(2, 4);
+        cout << "middle of main " << endl;
+        baz(m3);
+    }
+    cout << "end of main " << endl;
 }
+
+// CurrencyArray& create()
+// {
+//     CurrencyArray m3(2, 4);
+//     return m3;
+// }
+// int main()
+// {
+//     CurrencyArray& ma = create();
+//     cout << "cents " << ma.getCents() << endl;
+// }
 
 //// Other Codes in Lab2 Exercecise
 // int main() {

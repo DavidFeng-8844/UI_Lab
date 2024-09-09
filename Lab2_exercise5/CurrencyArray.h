@@ -23,7 +23,7 @@ public:
         cout << "copy constructor" << endl;
     }
 
-    CurrencyArray& operator=(const CurrencyArray& other);// Member function to copy an instance
+    CurrencyArray& operator=(const CurrencyArray& other); // Member function to copy an instance
 
     int getEuros() const
     {
