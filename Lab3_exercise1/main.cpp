@@ -1,5 +1,5 @@
 #include <QCoreApplication>
-#include<QtWidgets>
+#include <QtWidgets>
 
 int main(int argc, char *argv[])
 {
@@ -25,6 +25,6 @@ int main(int argc, char *argv[])
     // widget -> setEnabled(false); // Used to set the icon disabled
     label -> setFixedSize(QSize(500,300));
     QObject::connect(widget, SIGNAL(clicked()), &app, SLOT(quit()));
-    label-> show();
+    label -> show();
     return app.exec();
 }
