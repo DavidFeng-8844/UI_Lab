@@ -41,6 +41,7 @@ int main(int argc, char* argv[])
 
   // Avoid vertical resizing
   window->setFixedHeight(window->sizeHint().height());
+
   // Activate UI
   window->show();
 
