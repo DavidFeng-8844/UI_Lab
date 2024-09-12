@@ -25,6 +25,7 @@ MyMainWindows::MyMainWindows(QWidget *parent)
 
     //Declare Quit Action
     // QAction* quitAction;
+    QAction* quitAction;
     quitAction = new QAction("quit");
 
     connect(quitAction, &QAction::triggered, [=](){
@@ -33,12 +34,12 @@ MyMainWindows::MyMainWindows(QWidget *parent)
 
     //Add menus
 
-    QMenu * fileMenu = menuBar()->addMenu("file");
+    QMenu * fileMenu = menuBar()->addMenu("File");
     fileMenu->addAction(quitAction);
-    menuBar->addMenu("Edit");
-    menuBar->addMenu("Window");
-    menuBar->addMenu("Settings");
-    menuBar->addMenu("Help");
+    menuBar()->addMenu("Edit");
+    menuBar()->addMenu("Window");
+    menuBar()->addMenu("Settings");
+    menuBar()->addMenu("Help");
 
 
 }

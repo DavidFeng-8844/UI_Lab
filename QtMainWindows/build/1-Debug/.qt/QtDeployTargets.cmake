@@ -1,0 +1,2 @@
+set(__QT_DEPLOY_TARGET_QtMainWindows_FILE /home/davidfeng/UI_Lab/QtMainWindows/build/1-Debug/QtMainWindows)
+set(__QT_DEPLOY_TARGET_QtMainWindows_TYPE EXECUTABLE)

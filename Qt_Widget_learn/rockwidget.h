@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QLabel>
+
 class RockWidget : public QWidget
 {
     Q_OBJECT
