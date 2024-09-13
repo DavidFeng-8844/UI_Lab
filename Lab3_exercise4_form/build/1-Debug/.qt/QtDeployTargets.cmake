@@ -1,0 +1,2 @@
+set(__QT_DEPLOY_TARGET_Lab3_exercise4_form_FILE /home/davidfeng/UI_Lab/Lab3_exercise4_form/build/1-Debug/Lab3_exercise4_form)
+set(__QT_DEPLOY_TARGET_Lab3_exercise4_form_TYPE EXECUTABLE)

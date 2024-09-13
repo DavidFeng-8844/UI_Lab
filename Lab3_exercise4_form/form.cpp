@@ -20,6 +20,9 @@ int main(int argc, char* argv[])
   form->addRow("Full &Name:", nameField);
   form->addRow("&Email:", emailField);
   form->addRow("&Age:", ageField);
+  form->setLabelAlignment(Qt::AlignLeft);
+  form->setRowWrapPolicy(QFormLayout::WrapAllRows);
+
 
   window->setLayout(form);
 

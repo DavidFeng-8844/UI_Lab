@@ -1,0 +1,8 @@
+/home/davidfeng/UI_Lab/Lab3_exercise5/build/1-Debug/CMakeFiles/Lab3_exercise5.dir
+/home/davidfeng/UI_Lab/Lab3_exercise5/build/1-Debug/CMakeFiles/edit_cache.dir
+/home/davidfeng/UI_Lab/Lab3_exercise5/build/1-Debug/CMakeFiles/rebuild_cache.dir
+/home/davidfeng/UI_Lab/Lab3_exercise5/build/1-Debug/CMakeFiles/list_install_components.dir
+/home/davidfeng/UI_Lab/Lab3_exercise5/build/1-Debug/CMakeFiles/install.dir
+/home/davidfeng/UI_Lab/Lab3_exercise5/build/1-Debug/CMakeFiles/install/local.dir
+/home/davidfeng/UI_Lab/Lab3_exercise5/build/1-Debug/CMakeFiles/install/strip.dir
+/home/davidfeng/UI_Lab/Lab3_exercise5/build/1-Debug/CMakeFiles/Lab3_exercise5_autogen.dir

@@ -1,0 +1,2 @@
+set(__QT_DEPLOY_TARGET_Lab3_exercise5_FILE /home/davidfeng/UI_Lab/Lab3_exercise5/build/1-Debug/Lab3_exercise5)
+set(__QT_DEPLOY_TARGET_Lab3_exercise5_TYPE EXECUTABLE)
