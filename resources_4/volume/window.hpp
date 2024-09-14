@@ -10,6 +10,7 @@ class QSlider;
 
 class VolumeControl: public QWidget
 {
+  Q_OBJECT
   public:
     VolumeControl();
 
@@ -21,11 +22,6 @@ class VolumeControl: public QWidget
 
     QLCDNumber* number;
     QSlider* slider;
+  private slots:
+    void numberColour(int);
 };
-
-void DiceRoller::rollDice() {
-    int n = rand() % 5;
-    die1->setPixmap(dieFaces[n]);
-    n = rand() % 5;
-    die2->setPixmap(dieFaces[n]);
-}

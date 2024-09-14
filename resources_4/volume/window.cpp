@@ -37,4 +37,14 @@ void VolumeControl::arrangeWidgets()
 void VolumeControl::makeConnections() {
     connect(slider, SIGNAL(valueChanged(int)),
             number, SLOT(display(int)));
+    connect(slider, SIGNAL(valueChanged(int)), this,
+            SLOT(numberColour(int)));
+}
+
+void VolumeControl::numberColour(int value)
+{
+    if (value > 75)
+        number->setStyleSheet("color: red");
+    else
+        number->setStyleSheet("color: black");
 }
