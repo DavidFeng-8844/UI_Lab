@@ -2,6 +2,7 @@
 // (NDE, 2015-10-01)
 
 #include "postcode.h"
+#include "examgradeinput.h"
 
 int main(int argc, char* argv[])
 {
@@ -11,23 +12,25 @@ int main(int argc, char* argv[])
 
   QFont font("DejaVu Sans", 18);
 
-  PostcodeLineEdit* postcode = new PostcodeLineEdit();
-  postcode->setFont(font);
+  // PostcodeLineEdit* postcode = new PostcodeLineEdit();
+  // postcode->setFont(font);
+
+  ExamGradeInput* examgrade = new ExamGradeInput();
 
   QLabel* label = new QLabel("&Postcode:");
   label->setFont(font);
-  label->setBuddy(postcode);
+  label->setBuddy(examgrade);
 
   // Arrange widgets horizontally
 
   QHBoxLayout* layout = new QHBoxLayout();
   layout->addWidget(label);
-  layout->addWidget(postcode);
+  layout->addWidget(examgrade);
 
   // Create and display window
 
   QWidget* window = new QWidget();
-  window->setWindowTitle("PostcodeLineEdit Test");
+  window->setWindowTitle("ExamGrade Test");
   window->setLayout(layout);
 
   window->show();
