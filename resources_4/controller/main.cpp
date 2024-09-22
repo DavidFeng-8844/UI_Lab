@@ -13,6 +13,10 @@ int main(int argc, char* argv[])
   Controller* left = new Controller("Left Channel");
   Controller* right = new Controller("Right Channel");
 
+  // Connect left and right slider together
+  QObject::connect(left, SIGNAL(valueChanged(int)), right, SLOT(setValue(int)));
+  QObject::connect(right, SIGNAL(valueChanged(int)), left, SLOT(setValue(int)));
+
   // Arrange widgets horizontally
 
   QHBoxLayout* layout = new QHBoxLayout();

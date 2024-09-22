@@ -35,4 +35,10 @@ void Controller::arrangeWidgets()
 void Controller::makeConnections()
 {
     connect(slider, SIGNAL(valueChanged(int)), number, SLOT(display(int)));
+    connect(slider, SIGNAL(valueChanged(int)), this, SIGNAL(valueChanged(int)));
+}
+
+void Controller::setValue(int value)
+{
+    slider->setValue(value);
 }

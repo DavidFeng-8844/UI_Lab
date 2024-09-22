@@ -53,9 +53,10 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = ../../controller.cpp \
-		../../main.cpp 
+		../../main.cpp moc_controller.cpp
 OBJECTS       = controller.o \
-		main.o
+		main.o \
+		moc_controller.o
 DIST          = /home/davidfeng/Qt/6.7.2/gcc_64/mkspecs/features/spec_pre.prf \
 		/home/davidfeng/Qt/6.7.2/gcc_64/mkspecs/common/unix.conf \
 		/home/davidfeng/Qt/6.7.2/gcc_64/mkspecs/common/linux.conf \
@@ -254,6 +255,7 @@ DIST          = /home/davidfeng/Qt/6.7.2/gcc_64/mkspecs/features/spec_pre.prf \
 		/home/davidfeng/Qt/6.7.2/gcc_64/mkspecs/features/qt_config.prf \
 		/home/davidfeng/Qt/6.7.2/gcc_64/mkspecs/linux-g++/qmake.conf \
 		/home/davidfeng/Qt/6.7.2/gcc_64/mkspecs/features/spec_post.prf \
+		../../.qmake.stash \
 		/home/davidfeng/Qt/6.7.2/gcc_64/mkspecs/features/exclusive_builds.prf \
 		/home/davidfeng/Qt/6.7.2/gcc_64/mkspecs/features/toolchain.prf \
 		/home/davidfeng/Qt/6.7.2/gcc_64/mkspecs/features/default_pre.prf \
@@ -486,6 +488,7 @@ Makefile: ../../controller.pro /home/davidfeng/Qt/6.7.2/gcc_64/mkspecs/linux-g++
 		/home/davidfeng/Qt/6.7.2/gcc_64/mkspecs/features/qt_config.prf \
 		/home/davidfeng/Qt/6.7.2/gcc_64/mkspecs/linux-g++/qmake.conf \
 		/home/davidfeng/Qt/6.7.2/gcc_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/home/davidfeng/Qt/6.7.2/gcc_64/mkspecs/features/exclusive_builds.prf \
 		/home/davidfeng/Qt/6.7.2/gcc_64/mkspecs/features/toolchain.prf \
 		/home/davidfeng/Qt/6.7.2/gcc_64/mkspecs/features/default_pre.prf \
@@ -710,6 +713,7 @@ Makefile: ../../controller.pro /home/davidfeng/Qt/6.7.2/gcc_64/mkspecs/linux-g++
 /home/davidfeng/Qt/6.7.2/gcc_64/mkspecs/features/qt_config.prf:
 /home/davidfeng/Qt/6.7.2/gcc_64/mkspecs/linux-g++/qmake.conf:
 /home/davidfeng/Qt/6.7.2/gcc_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 /home/davidfeng/Qt/6.7.2/gcc_64/mkspecs/features/exclusive_builds.prf:
 /home/davidfeng/Qt/6.7.2/gcc_64/mkspecs/features/toolchain.prf:
 /home/davidfeng/Qt/6.7.2/gcc_64/mkspecs/features/default_pre.prf:
@@ -783,8 +787,201 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /home/davidfeng/Qt/6.7.2/gcc_64/mkspecs/features/data/dummy.cpp
 	g++ -pipe -g -Wall -Wextra -fPIC -dM -E -o moc_predefs.h /home/davidfeng/Qt/6.7.2/gcc_64/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all:
+compiler_moc_header_make_all: moc_controller.cpp
 compiler_moc_header_clean:
+	-$(DEL_FILE) moc_controller.cpp
+moc_controller.cpp: ../../controller.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtWidgets/QGroupBox \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtWidgets/qgroupbox.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtGui/qtguiglobal.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qglobal.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qtversionchecks.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qtconfiginclude.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qconfig.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qtcore-config.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qtconfigmacros.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qtcoreexports.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qcompilerdetection.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qprocessordetection.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qsystemdetection.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qtdeprecationmarkers.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qtpreprocessorsupport.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qassert.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qtnoop.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qtypes.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qtversion.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qtclasshelpermacros.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qtypeinfo.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qcontainerfwd.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qsysinfo.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qlogging.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qflags.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qcompare_impl.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qatomic.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qbasicatomic.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qatomic_cxx11.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qgenericatomic.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qyieldcpu.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qconstructormacros.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qdarwinhelpers.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qexceptionhandling.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qforeach.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qttypetraits.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qfunctionpointer.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qglobalstatic.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qmalloc.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qminmax.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qnumeric.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qoverload.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qswap.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qtenvironmentvariables.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qtresource.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qttranslation.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qversiontagging.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtGui/qtgui-config.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtGui/qtguiexports.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtWidgets/qtwidgets-config.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtWidgets/qtwidgetsexports.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtWidgets/qframe.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtWidgets/qwidget.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtGui/qwindowdefs.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qobjectdefs.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qnamespace.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qtmetamacros.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qfunctionaltools_impl.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qobject.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qstring.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qchar.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qstringview.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qbytearray.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qrefcount.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qarraydata.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qpair.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qarraydatapointer.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qarraydataops.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qcontainertools_impl.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qxptype_traits.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/q20functional.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/q20memory.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qbytearrayalgorithms.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qbytearrayview.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qstringfwd.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/q20type_traits.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qstringliteral.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qstringalgorithms.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qlatin1stringview.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qanystringview.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qutf8stringview.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qstringtokenizer.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qstringbuilder.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qstringconverter.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qstringconverter_base.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qlist.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qhashfunctions.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qiterator.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qbytearraylist.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qstringlist.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qalgorithms.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qstringmatcher.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qcoreevent.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qscopedpointer.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qmetatype.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qcompare.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qcomparehelpers.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qdatastream.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qiodevicebase.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qfloat16.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qmath.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qiterable.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qmetacontainer.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qcontainerinfo.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qtaggedpointer.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qscopeguard.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qobject_impl.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qbindingstorage.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qmargins.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/q23utility.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtGui/qaction.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtGui/qkeysequence.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtGui/qicon.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qsize.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtGui/qpixmap.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtGui/qpaintdevice.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qrect.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qpoint.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtGui/qcolor.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtGui/qrgb.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtGui/qrgba64.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qshareddata.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtGui/qimage.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtGui/qpixelformat.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtGui/qtransform.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtGui/qpolygon.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtGui/qregion.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qline.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qvariant.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qdebug.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qtextstream.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qcontiguouscache.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qsharedpointer.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qmap.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qshareddata_impl.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qset.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qhash.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qvarlengtharray.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtGui/qpalette.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtGui/qbrush.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtGui/qfont.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qendian.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtGui/qfontmetrics.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtGui/qfontinfo.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtWidgets/qsizepolicy.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtGui/qcursor.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtGui/qbitmap.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtGui/qevent.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qiodevice.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qurl.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtGui/qeventpoint.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtGui/qvector2d.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtGui/qvectornd.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtGui/qpointingdevice.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtGui/qinputdevice.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtGui/qscreen.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/QList \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/QObject \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/QRect \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/QSize \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/QSizeF \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtGui/QTransform \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qnativeinterface.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtGui/qscreen_platform.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtGui/qguiapplication.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qcoreapplication.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qdeadlinetimer.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qelapsedtimer.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qeventloop.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qcoreapplication_platform.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qfuture.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qfutureinterface.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qmutex.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qtsan_impl.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qresultstore.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qfuture_impl.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qthreadpool.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qthread.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qrunnable.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qexception.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qpromise.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtGui/qinputmethod.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore/qlocale.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtGui/qguiapplication_platform.h \
+		moc_predefs.h \
+		/home/davidfeng/Qt/6.7.2/gcc_64/libexec/moc
+	/home/davidfeng/Qt/6.7.2/gcc_64/libexec/moc $(DEFINES) --include /home/davidfeng/UI_Lab/resources_4/controller/build/1-Debug/moc_predefs.h -I/home/davidfeng/Qt/6.7.2/gcc_64/mkspecs/linux-g++ -I/home/davidfeng/UI_Lab/resources_4/controller -I/home/davidfeng/Qt/6.7.2/gcc_64/include -I/home/davidfeng/Qt/6.7.2/gcc_64/include/QtWidgets -I/home/davidfeng/Qt/6.7.2/gcc_64/include/QtGui -I/home/davidfeng/Qt/6.7.2/gcc_64/include/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../controller.h -o moc_controller.cpp
+
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
@@ -797,7 +994,7 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_moc_predefs_clean 
+compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean 
 
 ####### Compile
 
@@ -1870,6 +2067,9 @@ main.o: ../../main.cpp /home/davidfeng/Qt/6.7.2/gcc_64/include/QtWidgets/QtWidge
 		../../controller.h \
 		/home/davidfeng/Qt/6.7.2/gcc_64/include/QtWidgets/QGroupBox
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../../main.cpp
+
+moc_controller.o: moc_controller.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_controller.o moc_controller.cpp
 
 ####### Install
 
