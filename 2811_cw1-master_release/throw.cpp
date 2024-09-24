@@ -37,9 +37,12 @@ void Throw::fire (Cave &c, string userCommand)
     else
     {
         if (s.compare("coin")==0)
-            loc ->add(new Coin());
+            loc->add(new Coin());
         else if (s.compare("mushroom")==0)
-            loc ->add(new Mushroom());
+            loc->add(new Mushroom());
+        else if (s.compare("bomb")==0) {
+            loc->add(new Bomb());
+        }
         else
             cerr << "I don't know how to throw a " << userCommand << endl;
     }
