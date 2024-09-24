@@ -42,8 +42,8 @@ void Explode::ignite(Location* l, Cave& c, int bombX, int bombY)
     if (bombY+1 < c.getHeight()) {
         Location* eloc = c.getMap()[bombX][bombY+1];
         bombDir[0] = ifBomb(eloc);
-        deleteGrid(eloc);
         if(bombDir[0]) {
+            deleteGrid(eloc);
             ignite(eloc, c, bombX, bombY+1);
         }
     }
@@ -51,8 +51,8 @@ void Explode::ignite(Location* l, Cave& c, int bombX, int bombY)
     if (bombX-1 > 0) {
         Location* sloc = c.getMap()[bombX-1][bombY];
         bombDir[1] = ifBomb(sloc);
-        deleteGrid(sloc);
         if(bombDir[1]) {
+            deleteGrid(sloc);
             ignite(sloc, c, bombX-1, bombY);
         }
     }
@@ -60,8 +60,8 @@ void Explode::ignite(Location* l, Cave& c, int bombX, int bombY)
     if (bombY-1 > 0) {
         Location* wloc = c.getMap()[bombX][bombY-1];
         bombDir[2] = ifBomb(wloc);
-        deleteGrid(wloc);
         if(bombDir[2]) {
+            deleteGrid(wloc);
             ignite(wloc, c, bombX, bombY-1);
         }
     }
@@ -69,8 +69,8 @@ void Explode::ignite(Location* l, Cave& c, int bombX, int bombY)
     if (bombX+1 < c.getWidth()) {
         Location* nloc = c.getMap()[bombX+1][bombY];
         bombDir[3] = ifBomb(nloc);
-        deleteGrid(nloc);
         if(bombDir[3]) {
+            deleteGrid(nloc);
             ignite(nloc, c, bombX+1, bombY);
         }
     }
