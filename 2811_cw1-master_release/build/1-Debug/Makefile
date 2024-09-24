@@ -52,14 +52,18 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = ../../throw.cpp \
+SOURCES       = ../../bomb.cpp \
+		../../explode.cpp \
+		../../throw.cpp \
 		../../tom.cpp \
 		../../cave.cpp \
 		../../location.cpp \
 		../../main.cpp \
 		../../move.cpp \
 		../../place.cpp 
-OBJECTS       = throw.o \
+OBJECTS       = bomb.o \
+		explode.o \
+		throw.o \
 		tom.o \
 		cave.o \
 		location.o \
@@ -285,9 +289,11 @@ DIST          = /Qt/6.7.2/gcc_64/mkspecs/features/spec_pre.prf \
 		/Qt/6.7.2/gcc_64/mkspecs/features/yacc.prf \
 		/Qt/6.7.2/gcc_64/mkspecs/features/lex.prf \
 		../../../../CavePlusPlus.pro ../../blocks.h \
+		../../bomb.h \
 		../../cave.h \
 		../../coin.h \
 		../../command.h \
+		../../explode.h \
 		../../location.h \
 		../../move.h \
 		../../mushroom.h \
@@ -296,7 +302,9 @@ DIST          = /Qt/6.7.2/gcc_64/mkspecs/features/spec_pre.prf \
 		../../rock.h \
 		../../thing.h \
 		../../throw.h \
-		../../tom.h ../../throw.cpp \
+		../../tom.h ../../bomb.cpp \
+		../../explode.cpp \
+		../../throw.cpp \
 		../../tom.cpp \
 		../../cave.cpp \
 		../../location.cpp \
@@ -770,8 +778,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../../Qt/6.7.2/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../../blocks.h ../../cave.h ../../coin.h ../../command.h ../../location.h ../../move.h ../../mushroom.h ../../place.h placeable.h ../../rock.h ../../thing.h ../../throw.h ../../tom.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../../throw.cpp ../../tom.cpp ../../cave.cpp ../../location.cpp ../../main.cpp ../../move.cpp ../../place.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../../blocks.h ../../bomb.h ../../cave.h ../../coin.h ../../command.h ../../explode.h ../../location.h ../../move.h ../../mushroom.h ../../place.h placeable.h ../../rock.h ../../thing.h ../../throw.h ../../tom.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../../bomb.cpp ../../explode.cpp ../../throw.cpp ../../tom.cpp ../../cave.cpp ../../location.cpp ../../main.cpp ../../move.cpp ../../place.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -819,6 +827,19 @@ compiler_clean: compiler_moc_predefs_clean
 
 ####### Compile
 
+bomb.o: ../../bomb.cpp ../../bomb.h \
+		../../thing.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o bomb.o ../../bomb.cpp
+
+explode.o: ../../explode.cpp ../../explode.h \
+		../../command.h \
+		../../cave.h \
+		../../location.h \
+		../../thing.h \
+		../../tom.h \
+		../../bomb.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o explode.o ../../explode.cpp
+
 throw.o: ../../throw.cpp ../../throw.h \
 		../../coin.h \
 		../../thing.h \
@@ -847,7 +868,8 @@ cave.o: ../../cave.cpp ../../cave.h \
 		../../command.h \
 		../../place.h \
 		../../coin.h \
-		../../mushroom.h
+		../../mushroom.h \
+		../../throw.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o cave.o ../../cave.cpp
 
 location.o: ../../location.cpp ../../blocks.h \
@@ -883,7 +905,8 @@ place.o: ../../place.cpp ../../place.h \
 		../../tom.h \
 		../../mushroom.h \
 		../../rock.h \
-		../../blocks.h
+		../../blocks.h \
+		../../bomb.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o place.o ../../place.cpp
 
 ####### Install

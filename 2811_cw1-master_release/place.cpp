@@ -1,5 +1,6 @@
 #include "place.h"
 #include "thing.h"
+#include "bomb.h"
 
 void Place::fire(Cave& c, string userCommand)
 {
@@ -10,6 +11,8 @@ void Place::fire(Cave& c, string userCommand)
         loc ->add(new Coin());
     else if (s.compare("mushroom")==0)
         loc ->add(new Mushroom());
+    else if (s.compare("bomb")==0)
+        loc -> add(new Bomb());
     else
         cerr << "I don't know how to place a " << userCommand << endl;
 }
