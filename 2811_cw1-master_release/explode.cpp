@@ -39,6 +39,7 @@ void Explode::ignite(Location* l, Cave& c, int bombX, int bombY)
     // Call deleteGrid function to delete one grid
     deleteGrid(l);
 
+    // Search four location
     if (bombY+1 < c.getHeight()) {
         Location* eloc = c.getMap()[bombX][bombY+1];
         bombDir[0] = ifBomb(eloc);
