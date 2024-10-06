@@ -17,6 +17,7 @@ public:
     ~Cave();
     //Copy Constructor
     Cave(const Cave& C);
+    Cave& operator=(const Cave& other);
     Location*** getMap() {return map;}
     void command (string s);
     void show();

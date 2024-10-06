@@ -26,22 +26,34 @@ Cave::Cave(int w, int h) : width(w), height(h) // width and height of the cave
     // map = new Location**[8];
     map = new Location** [height];
 
-    for (int x = 0; x < height; x++)
-    {
-        // Location** column = new Location*[8];
-        Location** column = new Location*[width];
-        map[x] = column;
-        for (int y = 0; y < width; y++)
-            column[y] = new Location();
-    }
-
-    // for (int x = 0; x < height; x++) {
-    //     map[x] = new Location*[width];  // Creates each column as an array of height size
-
-    //     for (int y = 0; y < width; y++) {
-    //         map[x][y] = new Location();  // Initialize each element in the 2D array
-    //     }
+    // for (int x = 0; x < height; x++)
+    // {
+    //     // Location** column = new Location*[8];
+    //     map[x] = new Location*[width];
+    //     for (int y = 0; y < width; y++)
+    //         map[x][y] = new Location();
     // }
+
+    try {
+        for (int x = 0; x < height; x++) {
+            map[x] = new Location*[width];
+            for (int y = 0; y < width; y++) {
+                map[x][y] = new Location(); // Ensure this does not throw
+            }
+        }
+    } catch (...) {
+        // Clean up already allocated memory to prevent leaks
+        for (int x = 0; x < height; x++) {
+            if (map[x]) {
+                for (int y = 0; y < width; y++) {
+                    delete map[x][y];
+                }
+                delete[] map[x];
+            }
+        }
+        delete[] map;
+        throw; // Re-throw the exception
+    }
 
     // create some rocks
     for (int x = 0; x < height; x++)
@@ -54,18 +66,20 @@ Cave::Cave(int w, int h) : width(w), height(h) // width and height of the cave
     tom -> setLocation( this, width/2,height/2);
 }
 
-Cave::~Cave()
-{
-    // delete (map[0][0]); // fixme: I don't think this deletes all Locations and arrays declared in the constructor...
-    for(int x = 0; x < height; x++) {
-        for(int y = 0; y < width; y++) {
-            delete(map[x][y]);
+Cave::~Cave() {
+    for (int x = 0; x < height; x++) {
+        for (int y = 0; y < width; y++) {
+            delete map[x][y]; // assuming Location has a proper destructor
         }
+        delete[] map[x];
     }
-    delete[] map; // fixme: ...neither does this.
+    delete[] map;
+    // delete tom; // if tom is dynamically allocated
 }
 
-Cave::Cave(const Cave &c) : width(c.width), height(c.height), tom(c.tom)
+
+//Copy constructor
+Cave::Cave(const Cave &c) : width(c.width), height(c.height)
 {
     // width = c.width;
     // height = c.height;
@@ -74,9 +88,39 @@ Cave::Cave(const Cave &c) : width(c.width), height(c.height), tom(c.tom)
     for (int x = 0; x < height; ++x) {
         map[x] = new Location*[width];
         for (int y = 0; y < width ; ++y) {
-            map[x][y] = new Location();
+            map[x][y] = new Location(*(c.map[x][y]));
         }
     }
+    // // Copy the rocks from the original cave
+    // for (auto thing : *c.map[width][height]->getThings()) {
+    //     if (dynamic_cast<Rock*>(thing)) {
+    //         // Create a new Rock and add it to the new Location
+    //         map[width][height]->add(new Rock());
+    //     }
+    // }
+    // Copy any other necessary members, like Tom
+    tom = new Tom(*c.tom);
+}
+
+Cave& Cave::operator=(const Cave& other) {
+    if (this != &other) {
+        // Clean up existing resources
+        // Delete old map
+        // (delete logic here)
+
+        // Deep copy
+        width = other.width;
+        height = other.height;
+        map = new Location**[height];
+        for (int x = 0; x < height; ++x) {
+            map[x] = new Location*[width];
+            for (int y = 0; y < width; ++y) {
+                map[x][y] = new Location(*(other.map[x][y]));
+            }
+        }
+    }
+
+    return *this;
 }
 
 void Cave::command (string userCommand)
@@ -111,5 +155,6 @@ void Cave::show()
 
     cout << endl;
 }
+
 
 
