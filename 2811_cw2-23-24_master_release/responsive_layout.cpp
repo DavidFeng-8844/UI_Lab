@@ -17,8 +17,6 @@ void ResponsiveLayout::setGeometry(const QRect &r /* our layout should always fi
     for (int i = 0; i < list_.size(); i++) {
 
         QLayoutItem *o = list_.at(i);
-        const int smallWidth = 500;
-        const int mediumWidth = 800;
 
         try {
             // cast the widget to one of our responsive labels
@@ -27,22 +25,44 @@ void ResponsiveLayout::setGeometry(const QRect &r /* our layout should always fi
             if (label == NULL) // null: cast failed on pointer
                 std::cout << "warning, unknown widget class in layout" << std::endl;
             else if (label -> text() == kNavTabs ) // headers go at the top
-                label -> setGeometry(0+r.x(),0+r.y(),r.width(), 40);
-            // only show a search button on small resolution, at the right of the window
-            else if (label -> text() == kSearchButton && r.width() < 500)
-                label -> setGeometry(r.width() - 65+r.x(),45+r.y(),60, 40);
-            // fixme: focus group did not like this behaviour for the search result element.
-            // else if (label -> text() == kSearchResult )
-            //     label -> setGeometry( rand() %(r.width()-120)+r.x(),
-            //                          rand() %(r.height()-100)+40+r.y(), 60, 60);
-            else if (label->text() == kSearchResult) {
-                // Center search result and adjust size based on window width
-                int width = (r.width() < mediumWidth) ? 60 : 80;
-                int height = (r.height() < mediumWidth) ? 60 : 80;
-                int centerX = r.x() + (r.width() - width) / 2;
-                int centerY = r.y() + (r.height() - height) / 2;
-                label->setGeometry(centerX, centerY, width, height);
+                label -> setGeometry(0+r.x()+0.01*r.width(),0+r.y(),r.width()-0.02*r.width(), r.height()*0.1);
+
+            // Home, Menu, shopping basket and sign in on second row
+            else if (label -> text() == kHomeLink)
+                label -> setGeometry(r.x() + 0.01*r.width(), r.height()*0.102+r.y(), r.width() * 0.245, r.height()*0.1);
+            else if (label -> text() == KMenu)
+                label -> setGeometry(r.x() + 0.26*r.width(), r.height()*0.102+r.y(), r.width() * 0.245, r.height()*0.1);
+            else if (label -> text() == kShoppingBasket)
+                label -> setGeometry(r.x() + 0.51*r.width(), r.height()*0.102+r.y(), r.width() * 0.245, r.height()*0.1);
+            else if (label -> text() == kSignIn)
+                label -> setGeometry(r.x() + 0.76*r.width(), r.height()*0.102+r.y(), r.width() * 0.23, r.height()*0.1);
+
+            // Search Text and Button in second row
+            else if (label->text() == kSearchText) {
+                // Put search text to the left of the search button
+                label -> setGeometry(r.x() + 0.01*r.width(), r.height()*0.205+r.y(), r.width() * 0.775, r.height()*0.1);
             }
+            else if (label -> text() == kSearchButton)
+                label -> setGeometry((r.width() + r.x()) - r.width() * 0.21, r.height()*0.205+r.y(), r.width() * 0.20, r.height()*0.1);
+
+            // kSResultImage and KSResultText fill the middle part
+            else if (label -> text() == kSResultImage) {
+                // Put search result image to the left of the search result text
+                label -> setGeometry(r.x() + 0.01*r.width(), r.height()*0.31+r.y(), r.width() * 0.673, r.height()*0.49);
+            }
+            else if (label -> text() == KSResultText)
+                label -> setGeometry(r.x() + 0.687*r.width(), r.height()*0.31+r.y(), r.width() * 0.3, r.height()*0.49);
+
+            // Search Option, previous and next on the next row together, option in the middle
+            else if (label -> text() == kSearchBackward)
+                label -> setGeometry(r.x() + 0.01*r.width(), r.height()*0.8+r.y(), r.width() * 0.245, r.height()*0.1);
+            else if (label -> text() == kSearchOptions)
+                label -> setGeometry(r.x() + 0.26*r.width(), r.height()*0.8+r.y(), r.width() * 0.480, r.height()*0.1);
+            else if (label -> text() == kSearchForward)
+                label -> setGeometry(r.x() + 0.745*r.width(), r.height()*0.8+r.y(), r.width() * 0.245, r.height()*0.1);
+            // KAdvert at the bottom 10%
+            else if (label -> text() == kAdvert)
+                label -> setGeometry(r.x() + 0.01*r.width(), r.height()*0.9+r.y(), r.width()-0.02*r.width(), r.height()*0.1);
             else // otherwise: disappear label by moving out of bounds
                 label -> setGeometry (-1,-1,0,0);
 
@@ -80,7 +100,36 @@ QSize ResponsiveLayout::minimumSize() const {
 }
 
 ResponsiveLayout::~ResponsiveLayout() {
+    // QLayoutItem *item;
+    // while ((item = takeAt(0)))
+    //     delete item;
+    // Additionally, clear the QList to avoid any leftover pointers
+    // qDeleteAll(list_); // Deletes all items that haven't been taken
+    // list_.clear(); // Clears the list to avoid dangling pointers
     QLayoutItem *item;
-    while ((item = takeAt(0)))
-        delete item;
+    while ((item = takeAt(0))) {
+        if (item->widget()) {
+            item->widget()->setParent(nullptr); // Remove widget from its parent
+        }
+        delete item; // Delete the layout item
+    }
+    list_.clear(); // Clear the list to avoid dangling pointers
+}
+
+void ResponsiveLayout::clear()
+{
+    QLayoutItem *item;
+    while ((item = takeAt(0))) {
+        if (item->widget()) {
+            item->widget()->setParent(nullptr); // Remove widget from its parent
+        }
+        delete item; // Delete the layout item
+    }
+    list_.clear(); // Clear the list to avoid dangling pointers
+}
+
+
+void ResponsiveLayout::addWidget(QWidget *widget) {
+    QLayoutItem *item = new QWidgetItem(widget);  // Wrap widget in a QLayoutItem
+    addItem(item);  // Call your custom addItem() to store the item
 }

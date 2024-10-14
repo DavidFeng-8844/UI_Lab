@@ -51,6 +51,14 @@ void ResponsiveWindow::createWidgets() {
     compactLayout->addWidget(new ResponsiveLabel(KSResultText));
     // note that later widgets are drawn on top of earlier widgets
 
+    // Add widgets to the horizontal layout
+    horizontalLayout->addWidget(new ResponsiveLabel(kHomeLink));
+    horizontalLayout->addWidget(new ResponsiveLabel(KMenu));
+    horizontalLayout->addWidget(new ResponsiveLabel(kSearchText));
+    horizontalLayout->addWidget(new ResponsiveLabel(kSearchButton));
+    horizontalLayout->addWidget(new ResponsiveLabel(kSearchResult));
+    horizontalLayout->addWidget(new ResponsiveLabel(kAdvert));
+
     // Add widgets to the vertical layout
     verticalLayout->addWidget(new ResponsiveLabel(kNavTabs));
     verticalLayout->addWidget(new ResponsiveLabel(kSearchText));
@@ -59,22 +67,6 @@ void ResponsiveWindow::createWidgets() {
     verticalLayout->addWidget(new ResponsiveLabel(kShoppingBasket));
     verticalLayout->addWidget(new ResponsiveLabel(kSignIn));
     verticalLayout->addWidget(new ResponsiveLabel(kAdvert));
-
-    // Add widgets to the horizontal layout in a similar to compact layout space distribution
-    horizontalLayout->addWidget(new ResponsiveLabel(kNavTabs));
-    horizontalLayout->addWidget(new ResponsiveLabel(kSearchText));
-    horizontalLayout->addWidget(new ResponsiveLabel(kSearchButton));
-    horizontalLayout->addWidget(new ResponsiveLabel(kSearchResult));
-    horizontalLayout->addWidget(new ResponsiveLabel(kShoppingBasket));
-    horizontalLayout->addWidget(new ResponsiveLabel(kSignIn));
-    horizontalLayout->addWidget(new ResponsiveLabel(kAdvert));
-    horizontalLayout->addWidget(new ResponsiveLabel(kHomeLink));
-    horizontalLayout->addWidget(new ResponsiveLabel(KMenu));
-    horizontalLayout->addWidget(new ResponsiveLabel(kSearchOptions));
-    horizontalLayout->addWidget(new ResponsiveLabel(kSearchBackward));
-    horizontalLayout->addWidget(new ResponsiveLabel(kSearchForward));
-    horizontalLayout->addWidget(new ResponsiveLabel(kSResultImage));
-    horizontalLayout->addWidget(new ResponsiveLabel(KSResultText));
 
 
     setLayout(compactLayout);
@@ -102,45 +94,22 @@ void ResponsiveWindow::resizeEvent(QResizeEvent *event) {
 void ResponsiveWindow::switchToCompactLayout() {
     // Remove the current layout and switch to compact layout
     if (layout() != compactLayout) {
-        clearCurrentLayout(); // Remove current layout
+        delete layout();  // Remove current layout
         setLayout(compactLayout);
     }
 }
 
 void ResponsiveWindow::switchToHorizontalLayout() {
     if (layout() != horizontalLayout) {
-        clearCurrentLayout();  // Remove current layout
+        delete layout();  // Remove current layout
         setLayout(horizontalLayout);
     }
 }
 
 void ResponsiveWindow::switchToVerticalLayout() {
     if (layout() != verticalLayout) {
-        clearCurrentLayout(); // Remove current layout
+        delete layout();  // Remove current layout
         setLayout(verticalLayout);
     }
-}
-
-void ResponsiveWindow::clearCurrentLayout() {
-    QLayout* currentLayout = layout();  // Get the current layout
-    // if the currentLayout is compact Layout, implement method to clear QList<QLayoutItem*> list_
-    if (currentLayout == compactLayout) {
-        // static_cast<ResponsiveLayout*>(currentLayout)->~ResponsiveLayout();
-        // For ResponsiveLayout, clean up the QList<QLayoutItem*> list_
-        if (auto responsiveLayout = dynamic_cast<ResponsiveLayout*>(currentLayout)) {
-            responsiveLayout->clear();  // Add a clear method to properly remove items from the list_
-        }
-    }else if (currentLayout != nullptr) {
-        QLayoutItem* item;
-        // Iterate through all items in the current layout
-        while ((item = currentLayout->takeAt(0)) != nullptr) {
-            if (item->widget()) {
-                currentLayout->removeWidget(item->widget());  // Remove the widget from the layout
-                item->widget()->setParent(nullptr);  // Detach the widget from its parent
-            }
-            delete item;  // Clean up the layout item
-        }
-    }
-    delete currentLayout;  // Delete the entire layout after clearing its items
 }
 

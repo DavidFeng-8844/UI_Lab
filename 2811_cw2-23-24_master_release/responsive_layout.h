@@ -13,6 +13,7 @@ class ResponsiveLayout : public QLayout {
 public:
     ResponsiveLayout(): QLayout() {}
     ~ResponsiveLayout();
+    void clear();
 
     // standard functions for a QLayout
     void setGeometry(const QRect &rect);
@@ -23,6 +24,7 @@ public:
     int count() const;
     QLayoutItem *itemAt(int) const;
     QLayoutItem *takeAt(int);
+    void addWidget(QWidget *widget);
 
 private:
     QList<QLayoutItem*> list_;
